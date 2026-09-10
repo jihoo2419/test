@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>진로 탐색 설문조사</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+        .chip-selected {
+            background-color: #16a34a;
+            color: white;
+            border-color: #16a34a;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- Header Navbar -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+        <div class="max-w-2xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-600 text-white flex items-center justify-center font-bold text-xl shadow-md shadow-brand-100">
+                    <i class="fa-solid fa-clipboard-question"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight text-slate-900">청소년 희망 진로 설문</h1>
+                    <p class="text-xs text-slate-500">당신의 소중한 꿈과 의견을 들려주세요</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-2xl w-full mx-auto px-4 py-8 md:py-12">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-8">
+            <div class="mb-6 border-b border-slate-100 pb-4">
+                <h2 class="text-xl font-bold text-slate-900">설문지 작성</h2>
+                <p class="text-sm text-slate-500 mt-1">작성해주신 답변은 진로 탐색 및 관련 활동 자료로만 활용됩니다.</p>
+            </div>
+
+            <form id="surveyForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+                
+                <!-- 1. 이름 -->
+                <div>
+                    <label for="inputName" class="block text-sm font-semibold text-slate-700 mb-2">
+                        1. 이름 <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                            <i class="fa-solid fa-user"></i>
+                        </span>
+                        <input type="text" id="inputName" required placeholder="이름을 입력하세요 (예: 홍길동)"
+                            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                    </div>
+                </div>
+
+                <!-- 2. 나이 -->
+                <div>
+                    <label for="inputAge" class="block text-sm font-semibold text-slate-700 mb-2">
+                        2. 나이 <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                            <i class="fa-solid fa-cake-candles"></i>
+                        </span>
+                        <input type="number" id="inputAge" min="1" max="120" required placeholder="나이를 입력하세요 (예: 17)"
+                            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                    </div>
+                </div>
+
+                <!-- 3. 성별 -->
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 mb-2">
+                        3. 성별 <span class="text-red-500">*</span>
+                    </label>
+                    <div class="grid grid-cols-3 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="gender" value="남성" required class="peer hidden">
+                            <div class="w-full py-3 text-center border border-slate-300 rounded-xl font-medium text-slate-600 peer-checked:bg-brand-600 peer-checked:text-white peer-checked:border-brand-600 transition-all hover:bg-slate-50 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-mars"></i> 남성
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="gender" value="여성" class="peer hidden">
+                            <div class="w-full py-3 text-center border border-slate-300 rounded-xl font-medium text-slate-600 peer-checked:bg-brand-600 peer-checked:text-white peer-checked:border-brand-600 transition-all hover:bg-slate-50 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-venus"></i> 여성
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="gender" value="선택 안함" class="peer hidden">
+                            <div class="w-full py-3 text-center border border-slate-300 rounded-xl font-medium text-slate-600 peer-checked:bg-brand-600 peer-checked:text-white peer-checked:border-brand-600 transition-all hover:bg-slate-50 flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-user-shield"></i> 기타 / 비공개
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- 4. 희망 진로 -->
+                <div>
+                    <label for="inputCareer" class="block text-sm font-semibold text-slate-700 mb-2">
+                        4. 희망 진로 <span class="text-red-500">*</span>
+                    </label>
+                    
+                    <!-- Quick Select Chips -->
+                    <div class="mb-3">
+                        <p class="text-xs text-slate-500 mb-2">추천 키워드 (클릭하여 빠르게 선택):</p>
+                        <div class="flex flex-wrap gap-2" id="careerChips">
+                            <button type="button" onclick="selectCareerChip(this, '소프트웨어 개발자')" class="chip px-3 py-1.5 text-xs rounded-lg border border-slate-200 text-slate-600 hover:border-brand-500 transition-all">💻 소프트웨어 개발자</button>
+                            <button type="button" onclick="selectCareerChip(this, '인공지능 연구원')" class="chip px-3 py-1.5 text-xs rounded-lg border border-slate-200 text-slate-600 hover:border-brand-500 transition-all">🤖 인공지능 연구원</button>
+                            <button type="button" onclick="selectCareerChip(this, '의학 / 보건 전문가')" class="chip px-3 py-1.5 text-xs rounded-lg border border-slate-200 text-slate-600 hover:border-brand-500 transition-all">🩺 의학 / 보건</button>
+                            <button type="button" onclick="selectCareerChip(this, '콘텐츠 크리에이터')" class="chip px-3 py-1.5 text-xs rounded-lg border border-slate-200 text-slate-600 hover:border-brand-500 transition-all">🎬 콘텐츠 크리에이터</button>
+                            <button type="button" onclick="selectCareerChip(this, '디자이너 / 아티스트')" class="chip px-3 py-1.5 text-xs rounded-lg border border-slate-200 text-slate-600 hover:border-brand-500 transition-all">🎨 디자이너</button>
+                            <button type="button" onclick="selectCareerChip(this, '경영 / 마케팅')" class="chip px-3 py-1.5 text-xs rounded-lg border border-slate-200 text-slate-600 hover:border-brand-500 transition-all">📈 경영 / 마케팅</button>
+                            <button type="button" onclick="selectCareerChip(this, '교사 / 교육자')" class="chip px-3 py-1.5 text-xs rounded-lg border border-slate-200 text-slate-600 hover:border-brand-500 transition-all">📚 교사 / 교육자</button>
+                        </div>
+                    </div>
+
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center text-slate-400">
+                            <i class="fa-solid fa-compass"></i>
+                        </span>
+                        <input type="text" id="inputCareer" required placeholder="희망 진로를 직접 입력하거나 위에서 선택하세요"
+                            class="w-full pl-10 pr-4 py-3 rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="pt-4">
+                    <button type="submit" id="btnSubmit" class="w-full py-4 bg-brand-600 hover:bg-brand-700 text-white font-bold text-base rounded-xl shadow-lg shadow-brand-200 transition-all duration-200 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        <span>설문 제출하기</span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- Custom Toast Alert Component -->
+    <div id="toastContainer" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-4 text-center text-xs text-slate-400">
+        <p>© 희망 진로 설문 시스템</p>
+    </footer>
+
+    <script>
+        // Google Apps Script Web App URL
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwyewhblon0Qom6yLkkl5SzDOS1RT_b1EMnDqYDJXtrPJ0em2Qhc8AwGxGnXUf0LVT_MQ/exec';
+
+        // Select Career Chip
+        function selectCareerChip(buttonEl, textValue) {
+            document.querySelectorAll('#careerChips .chip').forEach(chip => {
+                chip.classList.remove('chip-selected');
+            });
+            buttonEl.classList.add('chip-selected');
+            document.getElementById('inputCareer').value = textValue;
+        }
+
+        // Handle Form Submission
+        async function handleFormSubmit(event) {
+            event.preventDefault();
+
+            const name = document.getElementById('inputName').value.trim();
+            const age = document.getElementById('inputAge').value;
+            const genderEl = document.querySelector('input[name="gender"]:checked');
+            const career = document.getElementById('inputCareer').value.trim();
+
+            if (!genderEl) {
+                showToast('성별을 선택해주세요.', 'error');
+                return;
+            }
+
+            const gender = genderEl.value;
+            const submitBtn = document.getElementById('btnSubmit');
+            const originalBtnText = submitBtn.innerHTML;
+
+            // UI Loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-circle-notch fa-spin"></i> 제출 중...`;
+
+            const payload = {
+                name: name,
+                age: age,
+                gender: gender,
+                career: career
+            };
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8',
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                showToast('🎉 설문이 성공적으로 제출되었습니다. 감사합니다!', 'success');
+
+                // Reset form
+                document.getElementById('surveyForm').reset();
+                document.querySelectorAll('#careerChips .chip').forEach(chip => {
+                    chip.classList.remove('chip-selected');
+                });
+
+            } catch (error) {
+                console.error('Submission error:', error);
+                showToast('제출 중 오류가 발생했습니다. 다시 시도해 주세요.', 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnText;
+            }
+        }
+
+        // Toast Notification Function
+        function showToast(message, type = 'info') {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+
+            let icon = 'fa-circle-info';
+            let bgClass = 'bg-slate-800 text-white';
+
+            if (type === 'success') {
+                icon = 'fa-circle-check';
+                bgClass = 'bg-emerald-600 text-white';
+            } else if (type === 'error') {
+                icon = 'fa-circle-xmark';
+                bgClass = 'bg-red-600 text-white';
+            }
+
+            toast.className = `pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-xl shadow-xl text-sm font-medium transition-all duration-300 transform translate-y-2 opacity-0 ${bgClass}`;
+            toast.innerHTML = `<i class="fa-solid ${icon} text-lg"></i> <span>${message}</span>`;
+
+            toastContainer.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 3500);
+        }
+    </script>
+</body>
+</html>
